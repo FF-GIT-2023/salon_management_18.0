@@ -1,0 +1,20 @@
+{
+    "name": "Salon Worker Schedule",
+    "version": "18.0.1.0.0",
+    "summary": "Schedule worker commitment weekly base",
+    "category": "Salon",
+    "author": "ForeFront Technologies",
+    "depends": ["web_timeline", "report_xlsx"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/worker_schedule_view.xml",
+        "data/sequence_data.xml",
+        "wizard/scheduler_report_view.xml",
+        "reports/work_schedule_report.xml",
+        "reports/reports.xml",
+    ],
+    "license": "LGPL-3",
+    "installable": True,
+    "auto_install": False,
+    "application": False,
+}
