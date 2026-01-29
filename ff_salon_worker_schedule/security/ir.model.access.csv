@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_worker_schedule,access.worker.schedule,model_worker_schedule,base.group_user,1,1,1,1
+access_worker_schedule_report,access.worker.schedule.report.wiz,model_scheduler_report_wiz,base.group_user,1,1,1,1

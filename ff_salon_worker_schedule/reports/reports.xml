@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report__work_schedule_report_xlsx" model="ir.actions.report">
+        <field name="name">Worker Schedule Report XLSX</field>
+        <field name="model">scheduler.report.wiz</field>
+        <field name="type">ir.actions.report</field>
+        <field name="report_name">ff_salon_worker_schedule.scheduler_report_xlsx</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_file">ff_salon_worker_schedule.scheduler_report_xlsx</field>
+    </record>
+</odoo>

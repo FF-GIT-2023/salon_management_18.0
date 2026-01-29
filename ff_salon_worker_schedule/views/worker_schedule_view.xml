@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_scheduler_timeline" model="ir.ui.view">
+        <field name="name">scheduler timeline view</field>
+        <field name="model">worker.schedule</field>
+        <field name="type">timeline</field>
+        <field name="arch" type="xml">
+            <timeline
+        date_start="start_date"
+        date_stop="end_date"
+        string="Time Period"
+        default_group_by="user_id"
+        event_open_popup="true"
+        zoomKey="ctrlKey"
+        mode="week"
+        colors="#99ff66:state == 'not_scheduled';#00cc00:state == 'scheduled';#ff9900:state == 'request_off';"
+        custom_color="true"
+      >
+                <field name="state" />
+                <templates>
+                    <div t-name="timeline-item">
+                        <t
+              t-set="values"
+              t-value="{'not_scheduled': 'Not Scheduled','scheduled': 'Scheduled','request_off': 'Requested Off'}"
+            />
+                        <t t-esc="values[record.state]" />
+                    </div>
+                </templates>
+            </timeline>
+        </field>
+    </record>
+    <record id="work_schedule_tree" model="ir.ui.view">
+        <field name="name">Work Schedule Tree</field>
+        <field name="model">worker.schedule</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="user_id" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="state" />
+            </list>
+         </field>
+    </record>
+    <record id="work_schedule_form" model="ir.ui.view">
+        <field name="name">Work Schedule Form</field>
+        <field name="model">worker.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Work Schedule">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <group>
+                            <field name="user_id" />
+                            <field name="state" />
+                        </group>
+                        <group>
+                            <field name="start_date" />
+                            <field name="end_date" force_save="1" />
+                            <field name="time" widget="float_time" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="work_schedule_action" model="ir.actions.act_window">
+        <field name="name">Weekly Work Schedule</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">worker.schedule</field>
+        <field name="view_mode">timeline,list,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            You can create a weekly work schedule here
+          </p><p>
+
+          </p>
+         </field>
+    </record>
+    <menuitem
+    id="worker_schedule_root"
+    name="Schedule"
+    sequence="4"
+    web_icon="ff_salon_worker_schedule,static/description/icon.png"
+  />
+    <menuitem
+    id="worker_schedule_sub"
+    name="Schedule"
+    parent="worker_schedule_root"
+    sequence="1"
+  />
+    <menuitem
+    id="worker_schedule_menu"
+    name="Work Schedule"
+    parent="worker_schedule_sub"
+    action="work_schedule_action"
+    sequence="1"
+  />
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.sequence" id="ff_seq_worker_schedule">
+        <field name="name">Schedule</field>
+        <field name="code">worker.schedule</field>
+        <field name="prefix">WS</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>
