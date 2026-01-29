@@ -1,0 +1,48 @@
+<odoo noupdate="1">
+    <record id="booking_status_email_template" model="mail.template">
+        <field name="name">Booking Status Email Template</field>
+        <field name="model_id" ref="model_calendar_event" />
+        <field name="subject">Booking Status</field>
+        <field name="email_from">{{ object.company_id.email }}</field>
+        <field name="email_to">{{ object.mail }}</field>
+        <field name="body_html">
+            <![CDATA[
+            <div style="font-family: Arial, sans-serif; color: #333;">
+                <p>Hi <t t-esc="object.customer_id.name" />,</p>
+
+                <p>Appointment confirmed with
+                <span style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: black;">CASA</span>
+                <span style="font-family: 'Brush Script MT', cursive; font-size: 14px; color: #B06A94;">de</span>
+                <span style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: black;">HILO</span>
+                on <strong><t t-esc="object.start.strftime('%Y-%m-%d')" /> at <t t-esc="object.get_local_start_time()" /></strong>. Please find the details below:</p>
+
+                <div class="col-5" style="background-color: #f4acb7; color: white; padding: 15px; margin-top: 20px; border-radius: 5px;">
+                    <h3 style="margin: 0;">Confirmed Time:</h3>
+                    <h2 style="margin: 0;"><t t-esc="object.start.strftime('%Y-%m-%d')" /> at <t t-esc="object.get_local_start_time()" /></h2>
+                </div>
+
+                <div class="col-5" style="border: 1px solid #ccc; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                    <h3 style="margin: 0;"> <t t-esc="object.company_id.name" /></h3>
+                    <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;" />
+                    <p style="margin: 0;">Service: <t t-esc="object.name" /></p>
+                    <p style="margin: 0;">Staff: <t t-esc="object.user_id.name" /></p>
+                </div>
+                <p></p>
+                <p style="margin-top: 20px;">
+                    Would you like to modify these appointments?
+                    Handle your appointments online at <t t-if="object.company_id.website"><t t-esc="object.company_id.website" /></t> or by calling directly.
+                </p>
+                <p style="margin-top: 20px;">Thanks and Regards,<br/>
+                <t t-if="object.company_id.name">
+                    <span style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: black;">CASA</span>
+                    <span style="font-family: 'Brush Script MT', cursive; font-size: 14px; color: #B06A94;">de</span>
+                    <span style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: black;">HILO</span>
+                    <br/></t>
+                <t t-if="object.company_id.phone"><strong>Phone: <t t-esc="object.company_id.phone" /></strong><br/></t>
+                <t t-if="object.company_id.website"><strong>Website: <t t-esc="object.company_id.website" /></strong></t>
+                </p>
+            </div>
+            ]]>
+        </field>
+    </record>
+</odoo>
