@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+    id="booking_menu_id"
+    name="Bookings"
+    parent="point_of_sale.menu_point_root"
+    groups="group_salon_booking_manager,group_salon_booking_user"
+    sequence="100"
+  />
+    <menuitem
+    id="online_booking_menu_id"
+    name="Online Bookings"
+    parent="booking_menu_id"
+    sequence="1"
+    action="calendar.action_calendar_event"
+  />
+</odoo>
