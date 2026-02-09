@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="booking_report_action_pdf" model="ir.actions.report">
+        <field name="name">Booking Report</field>
+        <field name="model">calendar.event</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ff_booking_report.booking_report_template</field>
+        <field name="report_file">ff_booking_report.booking_report_template</field>
+        <field name="binding_model_id" ref="calendar.model_calendar_event" />
+    </record>
+</odoo>
