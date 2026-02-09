@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="walk_in_customer_form_view" model="ir.ui.view">
+        <field name="name">walk.in.customer.form.view</field>
+        <field name="model">walk.in.customer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="action_check_in"
+            string="Time-In"
+            type="object"
+            invisible="service_state in ('under_service', 'completed', 'on_hold') or check_in_bool"
+            class="oe_highlight mr-2"
+            groups="base.group_user"
+          />
+
+                    <button
+            name="action_check_out"
+            string="Time-Out"
+            type="object"
+            invisible="service_state in  ('waiting','on_hold', 'under_service', 'cancel') or check_out_bool"
+            class="mr-2"
+            groups="base.group_user"
+          />
+
+                    <button
+            name="go_for_service"
+            string="Go for service"
+            class="oe_highlight"
+            invisible="service_state in ('under_service', 'completed', 'cancel')"
+            type="object"
+            groups="base.group_user"
+          />
+                    <button
+            name="service_done"
+            string="Done"
+            class="oe_highlight"
+            invisible="service_state in ('waiting','on_hold', 'completed', 'cancel')"
+            type="object"
+            groups="base.group_user"
+          />
+                    <button
+            name="on_hold"
+            string="Put On Hold"
+            class="oe_highlight"
+            invisible="service_state in ('under_service','on_hold', 'completed', 'cancel')"
+            type="object"
+            groups="base.group_user"
+          />
+
+                    <button
+            name="action_cancel"
+            string="Cancel"
+            class="oe_highlight"
+            invisible="service_state in ('under_service', 'completed', 'cancel')"
+            type="object"
+            groups="base.group_user"
+          />
+
+                    <field
+            name="service_state"
+            widget="statusbar"
+            statusbar_visible="waiting,on_hold,under_service,completed,cancel"
+          />
+                </header>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="phone" />
+                            <field name="email" />
+                            <field name="service_ids" widget="many2many_tags" />
+                            <field name="note" />
+                            <field name="check_in_bool" invisible="1" />
+                            <field name="check_out_bool" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="created_date" />
+                            <field name="check_in_time" />
+                            <field name="check_out_time" />
+                            <field name="company_id" />
+                            <field name="user_id" />
+                        </group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="walk_in_customers_kanban_view" model="ir.ui.view">
+        <field name="name">walk.in.customer.kanban</field>
+        <field name="model">walk.in.customer</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="service_state" records_draggable="false">
+                <field name="service_state" />
+                <progressbar
+          field="service_state"
+          colors='{"completed": "success", "waiting": "warning", "under_service": "info", "on_hold": "primary", "cancel": "danger"}'
+          help="This bar allows to filter the stages based on scheduled activities."
+        />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="oe_kanban_card">
+                                    <div t-if="record.partner_id">
+                                        <strong>
+                                            <a>Customer :</a>
+                                        </strong>
+                                        <field name="partner_id" />
+                                    </div>
+                                    <div t-if="record.service_ids">
+                                        <strong>
+                                            <a>Service :</a>
+                                        </strong>
+                                        <field name="service_ids" />
+                                    </div>
+                                    <div t-if="record.user_id">
+                                        <strong>
+                                            <a>Staff :</a>
+                                        </strong>
+                                        <field name="user_id" />
+                                    </div>
+                                    <div t-if="record.check_in_time">
+                                        <strong>
+                                            <a>Time-in :</a>
+                                        </strong>
+                                        <field name="check_in_time" />
+                                    </div>
+                                    <div t-if="record.check_out_time">
+                                        <strong>
+                                            <a>Time-out :</a>
+                                        </strong>
+                                        <field name="check_out_time" />
+                                    </div>
+                                    <div t-if="record.company_id">
+                                        <strong>
+                                            <a>Location :</a>
+                                        </strong>
+                                        <field name="company_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="walk_in_customer_tree_view" model="ir.ui.view">
+        <field name="name">walk.in.customer.tree.view</field>
+        <field name="model">walk.in.customer</field>
+        <field name="arch" type="xml">
+            <list create="1" edit="1">
+                <field name="partner_id" />
+                <field name="service_ids" />
+                <field name="check_in_time" />
+                <field name="check_out_time" />
+                <field name="created_date" />
+                <field name="company_id" />
+                <field
+          name="service_state"
+          decoration-warning="service_state == 'waiting'"
+          decoration-info="service_state == 'under_service'"
+          decoration-success="service_state == 'completed'"
+          decoration-primary="service_state == 'on_hold'"
+          decoration-danger="service_state == 'cancel'"
+          optional="show"
+          widget="badge"
+        />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_walk_in_customer" model="ir.actions.act_window">
+        <field name="name">Casa Offline Bookings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">walk.in.customer</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field
+      name="domain"
+    >[('company_id', '=', context.get('allowed_company_ids')[0])]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Bookings found. Let's create one!
+            </p>
+        </field>
+        <field name="view_id" ref="walk_in_customers_kanban_view" />
+    </record>
+
+    <menuitem
+    id="offline_booking_menu_id"
+    name="Offline Bookings"
+    parent="ff_pos_walk_in_customer_booking.booking_menu_id"
+    sequence="2"
+    action="ff_pos_walk_in_customer_booking.action_walk_in_customer"
+  />
+</odoo>
