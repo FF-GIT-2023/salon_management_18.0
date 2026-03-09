@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report_tip_collection_report_xlsx" model="ir.actions.report">
+        <field name="name">Tip Report XLSX</field>
+        <field name="model">tip.report.wiz</field>
+        <field name="type">ir.actions.report</field>
+        <field name="report_name">ff_salon_tip_management.tip_report_xlsx</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_file">ff_salon_tip_management.tip_report_xlsx</field>
+    </record>
+</odoo>

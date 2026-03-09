@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_tip_report_wiz_form" model="ir.ui.view">
+        <field name="name">Tip Report Wizard</field>
+        <field name="model">tip.report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Tip Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" required="1" />
+                        </group>
+                        <group>
+                            <field name="date_to" required="1" />
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+            string="Cancel"
+            class="btn-secondary"
+            special="cancel"
+            data-hotkey="z"
+          />
+                    <button
+            string="Print PDF Report"
+            type="object"
+            name="generate_report"
+            class="btn btn-primary"
+          />
+            <button
+            name="print_xlsx_report"
+            type="object"
+            string="Print Excel Report"
+            class="btn-primary"
+          />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_tip_report_wiz_view" model="ir.actions.act_window">
+        <field name="name">Tip Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tip.report.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+        <menuitem
+    id="worker_tip_report_wiz_menu"
+    name="Tip Report"
+    parent="point_of_sale.menu_point_of_sale"
+    action="action_tip_report_wiz_view"
+    sequence="20"
+  />
+</odoo>

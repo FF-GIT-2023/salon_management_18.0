@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="employee_tip_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2><b>Tip Collection Report</b></h2>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-md mt-4">
+
+                        <thead>
+                            <th class="text-center"><strong>Rec Name</strong></th>
+                            <th class="text-center"><strong>Employee Name</strong></th>
+                            <th class="text-center"><strong>Tip Status</strong></th>
+                            <th class="text-center"><strong>Amount</strong></th>
+                        </thead>
+                        <tbody>
+                        <tr t-foreach="docs" t-as="o" style="border:'solid'">
+                            <td class="text-center"><span
+                    t-field="o.name"
+                  /></td>
+                            <td class="text-center"><span
+                    t-field="o.user_id.name"
+                  /></td>
+                            <td class="text-center"><span t-field="o.state" /></td>
+                            <td class="text-center"><span
+                    t-esc="'%.2f'% o.amount"
+                    t-field-options="{&quot;widget&quot;: &quot;False&quot;}"
+                  /></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="work_tip_report" model="ir.actions.report">
+        <field name="name">Salon Tip Report</field>
+        <field name="model">salon.tip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >ff_salon_tip_management.employee_tip_report_template</field>
+        <field
+      name="report_file"
+    >ff_salon_tip_management.employee_tip_report_template</field>
+    </record>
+</odoo>

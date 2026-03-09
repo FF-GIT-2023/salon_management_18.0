@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="salon_tip_list" model="ir.ui.view">
+        <field name="name">Salon Tip List</field>
+        <field name="model">salon.tip</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0" default_order="create_date desc">
+                <field name="name" />
+<!--                <field name="order_id" />-->
+                <field name="order_reference"/>
+                <field name="employee_id" invisible="1" optional="hide"/>
+                <field name="user_id" />
+                <field name="amount" />
+                <field name="currency_id" invisible="0" />
+                <field name="state" />
+                <field name="company_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="salon_tip_form" model="ir.ui.view">
+        <field name="name">salon.tip.form</field>
+        <field name="model">salon.tip</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="salon_tip_action" model="ir.actions.act_window">
+        <field name="name">Salon Tip Action</field>
+        <field name="res_model">salon.tip</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="salon_tip_list" />
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Salon Tip Details
+          </p>
+          <p>
+            This is an auto created record from sale order.
+            You can’t directly create a record.
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="salon_tip_menu_action"
+        name="Tip Details"
+        parent="point_of_sale.menu_point_of_sale"
+        action="salon_tip_action"
+        sequence="10"
+    />
+</odoo>

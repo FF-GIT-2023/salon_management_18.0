@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="tip_management_wiz_form" model="ir.ui.view">
+        <field name="name">Salon Tip Management Wiz</field>
+        <field name="model">salon.tip.management.report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Tip Collection Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" />
+                        </group>
+                        <group>
+                            <field name="date_to" />
+                            <field name="sales_man" />
+                        </group>
+                    </group>
+                </sheet>
+                 <footer>
+                    <button
+            name="tip_print_report"
+            string="Print"
+            type="object"
+            class="oe_highlight"
+          />
+                    or
+                    <button
+            name="action_cancel"
+            string="Cancel"
+            class="oe_link"
+            special="cancel"
+          />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="tip_management_wiz_action" model="ir.actions.act_window">
+        <field name="name">Salon Tip Management Wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">salon.tip.management.report.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+<!--    <menuitem-->
+<!--    id="salon_chair_report_menu_root"-->
+<!--    parent="salon_management.salon_management_menu_root"-->
+<!--    name="Reports"-->
+<!--  />-->
+<!--    <menuitem-->
+<!--    id="salon_chair_report_wiz_action"-->
+<!--    parent="salon_chair_report_menu_root"-->
+<!--    action="tip_management_wiz_action"-->
+<!--    name="Tip Collection"-->
+<!--  />-->
+</odoo>
