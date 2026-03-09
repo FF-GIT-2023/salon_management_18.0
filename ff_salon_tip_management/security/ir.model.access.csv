@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_salon_tip_management_report_wiz,access.salon.tip.management.report.wiz,model_salon_tip_management_report_wiz,base.group_user,1,1,1,1
+access_salon_tip,access.salon.tip,model_salon_tip,base.group_user,1,1,1,1
+access_sale_tip_pay_wiz_new,access.sale.tip.pay.wiz,model_sale_tip_pay_wiz,base.group_user,1,1,1,1
+access_tip_report_wiz_new,access.tip.report.wiz,model_tip_report_wiz,base.group_user,1,1,1,1

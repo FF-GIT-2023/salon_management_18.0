@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="sale_tip_pay_wiz_form" model="ir.ui.view">
+        <field name="name">sale.tip.pay.wiz.form</field>
+        <field name="model">sale.tip.pay.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Tip Pay Wizard">
+                <sheet>
+
+                    <group>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="user_id"/>
+                        <field name="tot_amount" readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Tip Details">
+                            <!-- IMPORTANT: No tree definition here -->
+                            <field name="tip_line_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+                <footer>
+                    <button name="pay_salon_user_tips"
+                            string="Pay Now"
+                            type="object"
+                            class="oe_highlight"/>
+                    <button string="Cancel"
+                            class="oe_link"
+                            special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="tip_pay_wiz_action" model="ir.actions.act_window">
+        <field name="name">Salon Tip Pay</field>
+        <field name="res_model">sale.tip.pay.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem
+        id="salon_tip_pay_wiz_menu"
+        parent="point_of_sale.menu_point_of_sale"
+        action="tip_pay_wiz_action"
+        name="Tip Collection"
+    />
+
+</odoo>
