@@ -181,30 +181,30 @@
                                         <div class="col-lg-6">
                                             <input type="text"
                                                    class="form-control py-3 border-white text-black"
-                                                   placeholder="First Name" name="name"/>
+                                                   placeholder="First Name" name="name" required="required"/>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="email"
                                                    class="form-control py-3 border-white text-black"
-                                                   placeholder="Email" name="email"/>
+                                                   placeholder="Email" name="email" required="required"/>
                                         </div>
                                         <div class="col-lg-6">
                                             <select class="form-select py-3 border-white "
                                                     aria-label="Default select example" name="service">
-                                                <t t-foreach="services" t-as="service">
+                                                <t t-foreach="services" t-as="service" required="required">
                                                     <option t-att-value="service.id" t-esc="service.name"
                                                             placeholder="Service" name="service_id"
-                                                            style="color:black !important"/>
+                                                            style="color:black !important" required="required"/>
                                                 </t>
                                             </select>
                                         </div>
                                         <div class="col-lg-6">
                                             <select class="form-select py-3 border-white"
-                                                    aria-label="Default select example" name="location_id">
+                                                    aria-label="Default select example" name="location_id" required="required">
                                                 <t t-foreach="locations" t-as="location">
                                                     <option t-att-value="location.id" t-esc="location.name"
                                                             placeholder="location" name="location_id"
-                                                            style="color:black !important"/>
+                                                            style="color:black !important" required="required"/>
                                                 </t>
                                             </select>
                                         </div>

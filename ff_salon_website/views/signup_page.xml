@@ -199,6 +199,54 @@
                                                 NOW
                                             </button>
                                         </div>
+                                        <div class="modal fade" id="incorrectpasswords" tabindex="-1"
+                                             aria-labelledby="userPopupLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content border-0 rounded-4 shadow-lg">
+
+                                                    <!-- Header -->
+                                                    <div class="modal-header text-white"
+                                                         style="background: var(--bs-primary);">
+                                                        <h5 class="modal-title fw-bold" id="bookingPopupLabel">
+                                                            Signup Status
+                                                        </h5>
+                                                        <button type="button" class="btn-close btn-close-white"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close"/>
+                                                    </div>
+
+                                                    <!-- Body -->
+                                                    <div class="modal-body text-center p-4">
+                                                        <i class="fa fa-calendar-times fa-3x text-danger mb-3"/>
+                                                        <h4 class="mb-3 text-dark">Password Error</h4>
+                                                        <p class="text-muted mb-0">
+                                                            The format of Password is incorrect, format should contain 8
+                                                            characters with atleast 1 Uppercase and lowercase character,
+                                                            atleast 1 number and special character !
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Footer -->
+                                                    <div class="modal-footer border-0 justify-content-center pb-4">
+                                                        <button type="button"
+                                                                class="btn btn-primary px-4 py-2 rounded-pill"
+                                                                data-bs-dismiss="modal">
+                                                            OK
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <t t-if="incorrectformat">
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                var popup = new bootstrap.Modal(document.getElementById('incorrectpasswords'));
+                                                popup.show();
+                                                });
+                                            </script>
+                                        </t>
+
                                         <div class="modal fade" id="userPopup" tabindex="-1"
                                              aria-labelledby="userPopupLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">

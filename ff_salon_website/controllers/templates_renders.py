@@ -1,5 +1,5 @@
 import random
-
+import re
 import pytz
 from odoo import http, fields
 from odoo.http import request
@@ -88,6 +88,23 @@ class SalonWebsite(http.Controller):
     def confirm_signup(self, **kwargs):
         user_obj = request.env['res.users'].sudo().search(['|', ('name', '=', kwargs.get('name')),
                                                            ('login', '=', kwargs.get('email'))])
+        pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.#_\-])[A-Za-z\d@$!%*?&.#_\-]{8,}$'
+
+        flag = False
+        if (len(kwargs.get('password')) and len(kwargs.get('confirm_password'))) != 8:
+            flag = True
+            if flag:
+                values = {
+                    'incorrectformat': bool(flag),
+                }
+                return request.render("ff_salon_website.signup_template", values)
+        elif not re.match(pattern, kwargs.get('password')):
+            flag = True
+            if flag:
+                values = {
+                    'incorrectformat': bool(flag),
+                }
+                return request.render("ff_salon_website.signup_template", values)
         if user_obj:
             values = {
                 'show_user_popup': bool(user_obj),
